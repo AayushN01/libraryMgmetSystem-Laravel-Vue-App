@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Book\BookCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,4 +49,7 @@ Route::group(['middleware'=>'auth','prefix'=>'admin'], function(){
         Route::get('/','User\UserController@index')->name('index');
         Route::get('/create','User\UserController@create')->name('create');
     });
+
+
+    Route::get('category',[BookCategoryController::class,'index'])->name('category.index');
 });

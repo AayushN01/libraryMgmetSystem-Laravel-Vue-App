@@ -34,6 +34,13 @@
                                 </a>
                             </li>
 
+                            <li>
+                                <a href="{{route('category.index')}}" class="waves-effect">
+                                    <i class="mdi mdi-tools"></i>
+                                    <span>Categories</span>
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                     <!-- Sidebar -->
