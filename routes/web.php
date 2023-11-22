@@ -50,6 +50,10 @@ Route::group(['middleware'=>'auth','prefix'=>'admin'], function(){
         Route::get('/create','User\UserController@create')->name('create');
     });
 
+    Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+        \UniSharp\LaravelFilemanager\Lfm::routes();
+    });
 
     Route::get('category',[BookCategoryController::class,'index'])->name('category.index');
+    Route::get('category/create',[BookCategoryController::class,'create'])->name('category.create');
 });

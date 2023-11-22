@@ -25,7 +25,7 @@ class BookCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.book.category.create');
     }
 
     /**
