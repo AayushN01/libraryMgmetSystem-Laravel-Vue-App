@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Book\BookCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('hello',function(){
     return "hello";
 });
+
+Route::post('category',[BookCategoryController::class,'store'])->name('category.store');
 
 

@@ -5343,8 +5343,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "AddCategoryComponent"
+  name: "AddCategoryComponent",
+  data: function data() {
+    return {
+      category: [],
+      errors: []
+    };
+  },
+  methods: {
+    addCategory: function addCategory(e) {
+      this.errors = [];
+
+      if (!this.category.name) {
+        this.errors.push('Category Name is Required');
+      }
+
+      var host = 'http://127.0.0.1:8000/api/';
+      var result = axios.post(host + 'category', {
+        "name": this.category.name,
+        'featured_image': this.category.featured_image,
+        'status': this.category.status
+      });
+      console.log(result);
+    }
+  }
 });
 
 /***/ }),
@@ -28427,88 +28463,157 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", { attrs: { action: "", id: "addCategory" } }, [
-    _c("div", { staticClass: "form-group row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.name,
-              expression: "name",
-            },
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            name: "name",
-            id: "name",
-            placeholder: "Name",
-            required: "",
-          },
-          domProps: { value: _vm.name },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.name = $event.target.value
-            },
-          },
-        }),
-      ]),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c(
-          "label",
-          { staticClass: "form-label", attrs: { for: "featured_image" } },
-          [_vm._v("Featured Image")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group" }, [
-          _vm._m(1),
+  return _c(
+    "form",
+    {
+      attrs: { action: "", id: "addCategory" },
+      on: {
+        submit: function ($event) {
+          $event.preventDefault()
+          return _vm.addCategory.apply(null, arguments)
+        },
+      },
+    },
+    [
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _vm._m(0),
           _vm._v(" "),
           _c("input", {
             directives: [
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.featured_image,
-                expression: "featured_image",
+                value: _vm.category.name,
+                expression: "category.name",
               },
             ],
             staticClass: "form-control",
             attrs: {
-              id: "featuredImageInput",
               type: "text",
-              name: "featured_image",
+              name: "name",
+              id: "name",
+              placeholder: "Name",
             },
-            domProps: { value: _vm.featured_image },
+            domProps: { value: _vm.category.name },
             on: {
               input: function ($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.featured_image = $event.target.value
+                _vm.$set(_vm.category, "name", $event.target.value)
               },
             },
           }),
+          _vm._v(" "),
+          _vm.errors
+            ? _c("div", { staticClass: "error" }, [
+                _c("span", { staticClass: "text text-danger" }, [
+                  _vm._v(_vm._s(_vm.errors)),
+                ]),
+              ])
+            : _vm._e(),
         ]),
-        _vm._v(" "),
-        _c("img", {
-          staticStyle: { "margin-top": "15px", "max-height": "100px" },
-          attrs: { id: "featuredImageHolder" },
-        }),
       ]),
-    ]),
-    _vm._v(" "),
-    _vm._m(2),
-  ])
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c(
+            "label",
+            { staticClass: "form-label", attrs: { for: "featured_image" } },
+            [_vm._v("Featured Image")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.category.featured_image,
+                  expression: "category.featured_image",
+                },
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "featuredImageInput",
+                type: "text",
+                name: "featured_image",
+              },
+              domProps: { value: _vm.category.featured_image },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.category, "featured_image", $event.target.value)
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("img", {
+            staticStyle: { "margin-top": "15px", "max-height": "100px" },
+            attrs: { id: "featuredImageHolder" },
+          }),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-md-4" }, [
+          _c("label", { staticClass: "form-label", attrs: { for: "status" } }, [
+            _vm._v("Staus"),
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.category.status,
+                  expression: "category.status",
+                },
+              ],
+              staticClass: "form-select",
+              attrs: { name: "status", id: "status" },
+              on: {
+                change: function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.category,
+                    "status",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                },
+              },
+            },
+            [
+              _c("option", { attrs: { value: "0", selected: "" } }, [
+                _vm._v("Draft"),
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1", selected: "" } }, [
+                _vm._v("Publish"),
+              ]),
+            ]
+          ),
+        ]),
+      ]),
+      _vm._v(" "),
+      _vm._m(2),
+    ]
+  )
 }
 var staticRenderFns = [
   function () {
